@@ -28,7 +28,23 @@ document.querySelector("form").addEventListener("submit", function(event) {
         return; 
     }
 
-    //This is to verify if the Object is actually saved
-    console.log("Donation Data:", donationData);
+    const tableRow = document.createElement("tr");
+
+    tableRow.innerHTML = `
+        <td>${charityName}</td>
+        <td>${donationAmount}</td>
+        <td>${donationDate}</td>
+        <td>${donorMessage}</td>
+        <td><button class="delete-btn">Delete</button></td>
+    `;
+
+    document.querySelector("#donation-table tbody").appendChild(tableRow);
+
+    tableRow.querySelector(".delete-btn").addEventListener("click", function() {
+        tableRow.remove();
+    });
+
+    document.querySelector("form").reset();
 
 });
+
