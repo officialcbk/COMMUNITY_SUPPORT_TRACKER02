@@ -40,6 +40,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
 
     document.querySelector("#donation-table tbody").appendChild(tableRow);
 
+    updateTotal()
 
     let donations = JSON.parse(localStorage.getItem("donations")) || [];
 
@@ -53,11 +54,19 @@ document.querySelector("form").addEventListener("submit", function(event) {
         localStorage.setItem("donations", JSON.stringify(donations));
 
         tableRow.remove();
+
+        updateTotal()
     });
 
     document.querySelector("form").reset();
 
 });
+
+function updateTotal() {
+    const donations = JSON.parse(localStorage.getItem("donations")) || [];
+    const total = donations.reduce((sum, donation) => sum + donation.donationAmount, 0);
+    document.querySelector("#total-donated").textContent = `Total Donated: $${total.toFixed(2)}`;
+}
 
 window.onload = function() {
     const donations = JSON.parse(localStorage.getItem("donations")) || [];
@@ -79,6 +88,10 @@ window.onload = function() {
             localStorage.setItem("donations", JSON.stringify(updatedDonations));
 
             tableRow.remove();
+
+            updateTotal()
         });
     });
+
+    updateTotal()
 };
