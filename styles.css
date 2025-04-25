@@ -138,3 +138,21 @@ button.delete-btn:hover {
 #existing_donation{
     margin-left: 25%;
 }
+
+#summary {
+    padding: 10px;
+    margin-top: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#total-donated {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
