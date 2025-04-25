@@ -40,31 +40,27 @@ document.querySelector("form").addEventListener("submit", function(event) {
 
     document.querySelector("#donation-table tbody").appendChild(tableRow);
 
-    updateTotal()
+    updateTotal();
 
     let donations = JSON.parse(localStorage.getItem("donations")) || [];
-
     donations.push(donationData);
-
     localStorage.setItem("donations", JSON.stringify(donations));
 
     tableRow.querySelector(".delete-btn").addEventListener("click", function() {
-
         donations = donations.filter(donation => donation.charityName !== charityName || donation.donationDate !== donationDate);
         localStorage.setItem("donations", JSON.stringify(donations));
 
         tableRow.remove();
 
-        updateTotal()
+        updateTotal();
     });
 
-    document.querySelector("form").reset();
-
+    document.querySelector("#donation-form").reset();
 });
 
 function updateTotal() {
     const donations = JSON.parse(localStorage.getItem("donations")) || [];
-    const total = donations.reduce((sum, donation) => sum + donation.donationAmount, 0);
+    const total = donations.reduce((sum, donation) => sum + parseFloat(donation.donationAmount), 0);
     document.querySelector("#total-donated").textContent = `Total Donated: $${total.toFixed(2)}`;
 }
 
@@ -83,15 +79,14 @@ window.onload = function() {
         document.querySelector("#donation-table tbody").appendChild(tableRow);
 
         tableRow.querySelector(".delete-btn").addEventListener("click", function() {
-
             const updatedDonations = donations.filter(d => d.charityName !== donation.charityName || d.donationDate !== donation.donationDate);
             localStorage.setItem("donations", JSON.stringify(updatedDonations));
 
             tableRow.remove();
 
-            updateTotal()
+            updateTotal();
         });
     });
 
-    updateTotal()
+    updateTotal();
 };
